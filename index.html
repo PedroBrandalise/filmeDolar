@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        
+
+            <div class="container"  id="conteudo" >
+                
+                <div class="card"  id="cardPrincipal" >
+                    <img class="card-img-top" src="" alt="-" id="imagem">
+                    <div class="card-body">
+                        <h5 class="card-title" id="cardTitulo">Card title</h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="ano">Card subtitle</h6>
+                        <p class="card-text" id="genero">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="card-link">Card link</a>
+                        
+                    </div>
+                </div>
+            </div>
+            <div id="bg" >
+            </div>
+        
+    </body>
+
+<script src="money.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<style>
+    html{
+        height: 100%;
+        position: relative;
+    }
+    body{
+        height: 100%;
+        position: relative;
+
+    }
+    #conteudo{
+        /* align-items: center;  */
+        /* margin-left: auto;
+        margin-right: auto; */
+        margin-top: 10%; 
+        position: absolute;
+        z-index: 10;
+        /* width: auto; */
+    }
+    #cardPrincipal{
+        margin-left: auto;
+        margin-right: auto;
+        /* width: auto; */
+        width: 18rem;
+          /* align-items: center;  */
+        /* margin: auto; */
+    }
+
+    #bg{
+        height: 100%;
+        position: relative;
+	
+        opacity:0.7;
+        filter: blur(50px);
+    background-size: cover;
+        background-image: url('https://m.media-amazon.com/images/M/MV5BNzVlY2MwMjktM2E4OS00Y2Y3LWE3ZjctYzhkZGM3YzA1ZWM2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg');
+    }
+</style>
+
+
+<script>
+
+
+var httpRequest;
+if (window.XMLHttpRequest) { // Mozilla, Safari, ...
+    httpRequest = new XMLHttpRequest();
+} else if (window.ActiveXObject) { // IE 8 and older
+    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+let resposta
+httpRequest.onreadystatechange = function(){
+}
+
+httpRequest.open('GET', "https://openexchangerates.org/api/latest.json?app_id=0db9615233e94f7e86bbb96e62b548c0", false);
+httpRequest.send(null);
+if (httpRequest.readyState === 4) {
+        // everything is good, the response is received
+        resposta = (httpRequest.responseText);
+    // alert(resposta)
+}else{
+    console.log('deu ruim')
+}
+
+
+
+let dolar = 324
+
+let nomeFilme="jaws"
+
+
+//     var lines = this.result.split('\n');
+
+
+file = "file:///C:/Users/Pedro/Desktop/qualFilmeDolar/filmes.txt"
+// file = "/filmes.txt"
+
+// var rawFile = new XMLHttpRequest();
+//     rawFile.open("GET", file, true);
+//     rawFile.onreadystatechange = function ()
+//     {
+//         if(rawFile.readyState === 4)
+//         {
+//             if(rawFile.status === 200 || rawFile.status == 0)
+//             {
+//                 var allText = rawFile.responseText;
+//                 // alert(allText);
+//             }
+//         }
+//     }
+// rawFile.send(null);
+
+
+httpRequest.open('GET', 'http://omdbapi.com/?apikey=23f9e0a8&t='+nomeFilme, false);
+httpRequest.send(null);
+if (httpRequest.readyState === 4) {
+        // everything is good, the response is received
+        resposta = (httpRequest.responseText);
+    // alert(resposta)
+}else{
+    console.log('deu ruim')
+}
+
+
+// alert(resposta)
+
+const filme = JSON.parse(httpRequest.responseText)
+
+console.log(filme)
+
+
+
+document.querySelector("#cardTitulo").innerHTML= filme.Title;
+document.querySelector("#ano").innerHTML= filme.Year;
+document.querySelector("#genero").innerHTML= filme.Genre;
+
+var imagem = document.getElementById("imagem");
+imagem.src = filme.Poster
+
+// document.body.style.backgroundImage = "url(\'"+filme.Poster+ "\')";
+
+
+// document.body.style.backgroundImage.setAttribute("filter", "blur");
+
+var bg = document.querySelector('#bg')
+bg.setAttribute('background-image', "url(\'"+filme.Poster+ "\')")
+console.log("url(\'"+filme.Poster+ "\')")
+
+</script>
+
+</html>
