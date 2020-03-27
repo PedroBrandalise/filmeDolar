@@ -45,7 +45,7 @@ if('nomeOriginal' in filmes[nFilme]){
 console.log(nomeFilme)
 // alert(nomeFilme)
 
-httpRequest.open('GET', 'http://omdbapi.com/?apikey=23f9e0a8&t='+nomeFilme, false);
+httpRequest.open('GET', 'https://omdbapi.com/?apikey=23f9e0a8&t='+nomeFilme, false);
 httpRequest.send(null);
 if (httpRequest.readyState === 4) {
         // everything is good, the response is received
