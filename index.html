@@ -2,157 +2,34 @@
 <html>
     <body>
         
-
-            <div class="container-fluid"  id="conteudo" >
-                <h1><div id ="numeroFilme">#000</div></h1>
+        
+        <div class="container-fluid"  id="conteudo" >
+                <h1 style="color: white;"><div id ="numeroFilme"></div></h1>
                 <div class="card"  id="cardPrincipal" >
                     <img class="card-img-top" src="" alt="-" id="imagem">
                     <div class="card-body">
-                        <h5 class="card-title" id="cardTitulo">Card title</h5>
-                        <h6 class="card-subtitle mb-2 text-muted" id="ano">Card subtitle</h6>
-                        <p class="card-text" id="genero">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="card-link">Card link</a>
+                        <h5 class="card-title" id="cardTitulo"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="ano"></h6>
+                        <p class="card-text" id="genero"></p>
+                        <a href="#" class="card-link"></a>
                         
                     </div>
                 </div>
             </div>
             <div id="bg" >
             </div>
+            
+        </body>
         
-    </body>
-
-<script src="filmes.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
-<style>
-    html{
-        height: 100%;
-        position: relative;
-    }
-    body{
-        height: 100%;
-        position: relative;
-
-    }
-    #conteudo{
-        /* align-items: center;  */
-        /* margin-left: auto;
-        margin-right: auto; */
-        /* margin-top: 10%;  */
-        position: absolute;
-        z-index: 10;
-        /* width: auto; */
-    }
-    #cardPrincipal{
-        margin-left: auto;
-        margin-right: auto;
-        /* width: auto; */
-        width: 18rem;
-          /* align-items: center;  */
-        /* margin: auto; */
-    }
-
-    #bg{
-        height: 100%;
-        position: relative;
-	
-        opacity:0.7;
-        filter: blur(15px);
-    background-size: cover;
-        background-image: url('cinema.jpg');
-    }
-    h1{
-        color: white;
-    }
-</style>
-
-
-<script>
-
-//pegar o valor do dolar
-var httpRequest;
-if (window.XMLHttpRequest) { // Mozilla, Safari, ...
-    httpRequest = new XMLHttpRequest();
-} else if (window.ActiveXObject) { // IE 8 and older
-    httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-}
-
-let resposta
-httpRequest.onreadystatechange = function(){
-}
-
-httpRequest.open('GET', "https://openexchangerates.org/api/latest.json?app_id=0db9615233e94f7e86bbb96e62b548c0", false);
-httpRequest.send(null);
-if (httpRequest.readyState === 4) {
-        // everything is good, the response is received
-        resposta = (httpRequest.responseText);
-    // alert(resposta)
-}else{
-    console.log('deu ruim')
-}
-
-const cotacoes = JSON.parse(httpRequest.responseText)
-
-console.log(cotacoes.rates['BRL'])
-
-let dolar = cotacoes.rates['BRL']
-
-let nFilme = Math.floor(dolar*100)
-
-//mudar o numero do filme na tela
-document.querySelector("#numeroFilme").innerHTML= "#"+nFilme;
-
-console.log (filmes[nFilme])
-
-
-let nomeFilme
-// myObj.hasOwnProperty(myProp)
-if('nomeOriginal' in filmes[nFilme]){
-    nomeFilme = filmes[nFilme].nomeOriginal
-}else{
-    nomeFilme = filmes[nFilme].nomePT
-}
-console.log(nomeFilme)
-// alert(nomeFilme)
-
-httpRequest.open('GET', 'http://omdbapi.com/?apikey=23f9e0a8&t='+nomeFilme, false);
-httpRequest.send(null);
-if (httpRequest.readyState === 4) {
-        // everything is good, the response is received
-        resposta = (httpRequest.responseText);
-    // alert(resposta)
-}else{
-    console.log('deu ruim')
-}
-
-
-// alert(resposta)
-
-const filme = JSON.parse(httpRequest.responseText)
-
-console.log(filme)
-
-
-
-document.querySelector("#cardTitulo").innerHTML= nomeFilme;
-document.querySelector("#ano").innerHTML= filme.Year;
-document.querySelector("#genero").innerHTML= filme.Genre;
-
-var imagem = document.getElementById("imagem");
-imagem.src = filme.Poster
-
-// document.body.style.backgroundImage = "url(\'"+filme.Poster+ "\')";
-
-
-// document.body.style.backgroundImage.setAttribute("filter", "blur");
-
-var bg = document.querySelector('#bg')
-bg.setAttribute('background-image', "url(\'"+filme.Poster+ "\')")
-console.log("url(\'"+filme.Poster+ "\')")
-
-</script>
-
-</html>
+        <script src="filmes.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
+        
+        
+        <script src="script.js"></script>
+        
+        </html>
+        <link rel="stylesheet" href="style.css">
